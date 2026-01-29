@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 function Counter() {
-  const [count, setCount] = useState(0); // [cite: 250]
+  const [count, setCount] = useState(0); // State management [cite: 578]
+
   return (
     <div>
       <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
     </div>
   );
 }
-export default Counter;
+
+export default Counter; // Added this line!

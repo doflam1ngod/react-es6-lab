@@ -1,21 +1,31 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function UserAPI() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     async function fetchUsers() {
-      const res = await fetch('https://jsonplaceholder.typicode.com/users'); // [cite: 300]
-      const data = await res.json();
-      setUsers(data);
+      try {
+        const res = await fetch('https://jsonplaceholder.typicode.com/users');
+        const data = await res.json();
+        setUsers(data);
+      } catch (err) {
+        console.error("Failed to fetch users:", err);
+      }
     }
     fetchUsers();
-  }, []);
+  }, []); // Empty array ensures this runs once on mount 
 
   return (
-    <ul>
-      {users.map(user => <li key={user.id}>{user.name}</li>)}
-    </ul>
+    <div>
+      <h3>API User List</h3>
+      <ul>
+        {users.map(user => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
+
 export default UserAPI;
